@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 
 	if (p == 0) {
 		read(pip[0], buf, sizeof(buf));
-		printf("%s\n", buf);
+		printf("%s", buf);
 	}
 
 }
