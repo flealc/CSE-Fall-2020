@@ -25,6 +25,6 @@ int main(int argc, char *argv[]) {
 	write(pip[1], argv[1], strlen(argv[1]));
         write(pip[1], "\n", strlen("\n"));
 	write(pip[1], argv[2], strlen(argv[2]));
-	read(pip[0], buf, 50);
+	read(pip[0], buf, strlen(buf));
 	printf("%s\n", buf);
 }
