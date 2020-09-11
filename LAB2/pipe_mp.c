@@ -43,6 +43,6 @@ int main(int argc, char *argv[]) {
 		read(pip[0], buf, 50);
 		printf("%s", buf);
 	}
-
+	return 0;
 }
 
