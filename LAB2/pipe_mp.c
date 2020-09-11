@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 	} 
 
 	if (p == 0) {
-		read(pip[0], buf, sizeof(buf));
+		read(pip[0], buf, 50);
 		printf("%s", buf);
 	}
 
