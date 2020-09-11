@@ -14,8 +14,7 @@ int main(int argc, char *argv[]) {
        	}
 
         int pip[2];
-	char buf[50];
-	char * cmdlarg;
+	char buf[100];
 	pid_t p;
 
 	/* Create pipe */
@@ -30,19 +29,21 @@ int main(int argc, char *argv[]) {
 	p = fork();
 	
 
-	if (p < 0) {
+	 if (p < 0) {
 		fprintf(stderr, "fork error: %s\n", strerror(errno));
 		exit(0);
 	}
 
-	if (p > 0) {
-		write(pip[1], argv[1], sizeof(argv[1]));
+	else if (p > 0) {
+		close(pip[0]);
+		write(pip[1], argv[1], 100);
 	} 
 
-	if (p == 0) {
-		read(pip[0], buf, 50);
+	else if (p == 0) {
+		close(pip[1]);
+		read(pip[0], buf, 100);
+		close(pip[0]);
 		printf("%s", buf);
 	}
 	return 0;
 }
-
