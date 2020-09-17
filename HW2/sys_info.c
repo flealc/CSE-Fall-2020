@@ -35,7 +35,6 @@ int main(int argc, char *argv[]) {
 	}
 
 	/* Create fork */
-//	p = fork();
 	
 
 	 if ((p = fork()) < 0) {
@@ -87,9 +86,9 @@ int main(int argc, char *argv[]) {
 		else { 		 
 		strcpy(path, "/bin/");
 		strcat(path, arg21);
-		
 		}
-               	execl(path, arg21, arg22, NULL);
+               	
+		execl(path, arg21, arg22, NULL);
 		exit(0);
 	}
 	return 0;
