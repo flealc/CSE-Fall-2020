@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 
 	 if ((p = fork()) < 0) {
 		fprintf(stderr, "fork error: %s\n", strerror(errno));
-		exit(0);
+		exit(1);
 	}
 
 	else if (p > 0) {
@@ -89,7 +89,8 @@ int main(int argc, char *argv[]) {
 		strcat(path, arg21);
 		
 		}
-               execl(path, arg21, arg22, NULL);
+               	execl(path, arg21, arg22, NULL);
+		exit(0);
 	}
 	return 0;
 }
