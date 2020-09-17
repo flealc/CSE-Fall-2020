@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/wait.h>
 
 int main(int argc, char *argv[]) {
 
@@ -23,6 +24,7 @@ int main(int argc, char *argv[]) {
         char arg2[50];
 	char buf[100];
 	pid_t p;
+	int status;
 
 	/* Create pipe */
 	pipe(pip);
@@ -33,10 +35,10 @@ int main(int argc, char *argv[]) {
 	}
 
 	/* Create fork */
-	p = fork();
+//	p = fork();
 	
 
-	 if (p < 0) {
+	 if ((p = fork()) < 0) {
 		fprintf(stderr, "fork error: %s\n", strerror(errno));
 		exit(0);
 	}
@@ -49,6 +51,14 @@ int main(int argc, char *argv[]) {
 		strcat(arg1, ",");
 		strcat(arg1,arg2);
 		write(pip[1], arg1, 100);
+		p = wait(&status);
+		if (wait(&status) != 0) {
+			exit(EXIT_FAILURE);
+		}
+		else {
+			exit(EXIT_SUCCESS);
+		}	
+
 	} 
 
 	else if (p == 0) { 
