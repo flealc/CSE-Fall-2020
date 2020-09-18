@@ -20,9 +20,9 @@ int main(int argc, char *argv[]) {
 	}
         
 	int pip[2];
-	char arg1[50];
-        char arg2[50];
-	char buf[100];
+//	char arg1[50];
+//      char arg2[50];
+//	char buf[100];
 	pid_t p;
 	int status;
 
@@ -45,11 +45,12 @@ int main(int argc, char *argv[]) {
 	else if (p > 0) {
 		close(pip[0]);
 		
-		strcpy(arg1, argv[1]);
-		strcpy(arg2, argv[2]);
-		strcat(arg1, ",");
-		strcat(arg1,arg2);
-		write(pip[1], arg1, 100);
+//		strcpy(arg1, argv[1]);
+//		strcpy(arg2, argv[2]);
+//		strcat(arg1, ",");
+//		strcat(arg1,arg2);
+		write(pip[1], argv[1], strlen(argv[1]) + 1);
+		write(pip[1], argv[2], strlen(argv[2]) + 1);
 		p = wait(&status);
 		if (wait(&status) != 0) {
 			exit(EXIT_FAILURE);
@@ -62,25 +63,18 @@ int main(int argc, char *argv[]) {
 
 	else if (p == 0) { 
                 
-		close(pip[1]);
-		read(pip[0], buf, 100);
-		close(pip[0]);
 		char arg21[50];
 		char arg22[50];
-		int i;
+		close(pip[1]);
+		read(pip[0], arg21, strlen(argv[1]) + 1);
+		read(pip[0], arg22, strlen(argv[2]) + 1);
+		close(pip[0]);
 		char path[50];
 		
-		for (i = 0; i < strlen(argv[1]); i++) {
-			arg21[i] = buf[i];		
-		}
-
-		
-		for (i = 0; i < strlen(argv[2]); i++) {
-			arg22[i] = buf[i + (strlen(argv[1]) + 1)];		
-		}
 		
 		if (strncmp("/bin/", arg21, 5) == 0) {
-			strcpy(path,arg21); 
+			execl(arg21, arg21,arg22, NULL);
+			exit(0); 
 		}
 	
 		else { 		 
