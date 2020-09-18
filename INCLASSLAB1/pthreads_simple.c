@@ -3,8 +3,8 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <stdlib.h>
-#ifndef NUMBER
- #define NUMBER 1000
+#ifndef INCCNT
+	#define INCCNT 1000
 #endif
 
 void *Thread1 (void *arg) { 
@@ -19,12 +19,21 @@ void *Thread2 (void *arg) {
 	
 	
         int i =*((int*) arg);
-	printf("Count: %d\n", i + NUMBER );
+	printf("Count: %d\n", i + INCCNT);
 	return NULL;
 }
 
 int main (int argc, char* argv[]) {
-	
+
+	if (argc < 3) {
+		printf("Error: Too few arguments\n");
+		return (-1);
+	}
+
+	if (argc > 3) {
+		printf("Error: Too many arguments\n");
+		return (-1);
+	}	
       int a =  atoi(argv[2]);
       void *ptr = (void*) &a;
 	pthread_t thread1;
