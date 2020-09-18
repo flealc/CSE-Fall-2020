@@ -12,7 +12,7 @@ void *Thread1 (void *arg) {
 	char* argm;
 	argm = (void *) arg; 
 	strcat(argm, " Example");
-	printf("Concat String: %s", argm);
+	printf("String: %s", argm);
     	return NULL; 
 } 
 void *Thread2 (void *arg) {
