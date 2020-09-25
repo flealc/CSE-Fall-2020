@@ -19,7 +19,7 @@ void *sum_thread(void *arg) {
 		sum[*threadindex] = (sum[*threadindex] + array[i]);
 	}
 //	threadsum[*threadindex] = sum;
-	printf("Thread %d sum: %d\n", *threadindex, sum[*threadindex]);
+//	printf("Thread %d sum: %d\n", *threadindex, sum[*threadindex]);
 	return NULL;
 }
 
