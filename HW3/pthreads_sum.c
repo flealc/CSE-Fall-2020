@@ -2,30 +2,38 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
+#ifndef NTHREADS
+	#define NTHREADS 2
+#endif 
+#ifndef ASIZE
+	#define ASIZE 1000
+#endif 
+
 
 // Create array of size ASIZE //
 int array[ASIZE];
-long i;
-int RATIO = (ASIZE/NTHREADS);
-int threadsum[NTHREADS];
-int sum[NTHREADS];
+int RATIO = (ASIZE/NTHREADS); // To assign a partition of the array to each thread //
+int threadsum[NTHREADS]; //Store each thread's sum //
+
 
 // Thread //
 void *sum_thread(void *arg) {
 	int *threadindex = (int*) arg;
-//	printf("Thread %d working on: %d\n", *threadindex, array[*threadindex]);
-//	int sum = 0;
+	int i;
+	long sum = 0;
 	for (i= (*threadindex  * RATIO); i < ((*threadindex * RATIO) + RATIO); i++) {
-		sum[*threadindex] = (sum[*threadindex] + array[i]);
+		sum = (sum + array[i]);
 	}
-//	threadsum[*threadindex] = sum;
-//	printf("Thread %d sum: %d\n", *threadindex, sum[*threadindex]);
+	threadsum[*threadindex] = sum;
+//	printf("Thread %d sum: %ld\n", *threadindex, sum);  // Check printf //
 	return NULL;
 }
+
 
 // Main function //
 int main (int argc, char *argv[]) {
 
+	int i;
 	
 	// Check for incorrect number of arguments //
 	if ((argc =! 2)) {
@@ -41,20 +49,27 @@ int main (int argc, char *argv[]) {
 	pthread_t tid[NTHREADS];
 	int threadnr[NTHREADS];
 
+//	printf("%d\n", NTHREADS); // Printf check //
+
 	// Loop for creation of NTHREADS number of threads //
 	for (i = 0; i < NTHREADS; i++) {
 		threadnr[i]= i;
 		pthread_create(&tid[i], NULL, sum_thread, (void*) &threadnr[i]);
 	}
 
+	// Join Threads//	
 	for (i = 0; i < NTHREADS; i++) {
 		pthread_join(tid[i], NULL);
 	}
-	
+
+	// Calculate and print sum //
 	long finalsum = 0;
+	
 	for (i = 0; i < NTHREADS; i++) {
-		finalsum = finalsum + sum[i];
+		finalsum = finalsum + threadsum[i];
 	}
-	printf("%ld", finalsum);
+	
+	printf("%ld\n", finalsum);
+	
 	return (0);
 }	 
