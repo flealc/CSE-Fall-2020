@@ -27,7 +27,7 @@ int main (int argc, char* argv[]) {
 	// Check for right number of args //
 	if (argc != 2) {
                 printf("Error: incorrect number of arguments\n");
-                exit(-1);
+                exit(1);
         }
 	int i;
 	
@@ -37,7 +37,7 @@ int main (int argc, char* argv[]) {
 
 	if (to_thread_arg < 1) {
 		printf("Usage: argument must be a positive integer\n");
-		exit(-1);
+		exit(1);
 	}	
 
 	// Create thread //
