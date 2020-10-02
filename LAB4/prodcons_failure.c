@@ -37,7 +37,7 @@ int main (int argc, char* argv[]) {
 
 	if (to_thread_arg < 1) {
 		printf("Usage: argument must be a positive integer\n");
-		EXIT_FAILURE;
+		exit(-1);
 	}	
 
 	// Create thread //
