@@ -24,16 +24,22 @@ void *prod_thread(void *arg) {
 
 
 int main (int argc, char* argv[]) {
-	
-	int i;
 	// Check for right number of args //
 	if (argc != 2) {
                 printf("Error: incorrect number of arguments\n");
-                return -1;
+                exit(-1);
         }
+	int i;
+	
 //	printf("%d\n", atoi(argv[1]));
 	pthread_t tid;
 	int to_thread_arg = atoi(argv[1]);
+
+	if (to_thread_arg < 1) {
+		printf("Usage: argument must be a positive integer\n");
+		EXIT_FAILURE;
+	}	
+
 	// Create thread //
 	pthread_create(&tid, NULL, prod_thread, (void*) &to_thread_arg);
 	
