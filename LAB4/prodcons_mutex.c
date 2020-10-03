@@ -6,7 +6,8 @@
 // Global Variable //
 
 int random_nr;
-sem_t r_mutex, w_mutex;
+sem_t r_mutex; 
+sem_t w_mutex;
 
 // Thread routine //
 void *prod_thread(void *arg) {
