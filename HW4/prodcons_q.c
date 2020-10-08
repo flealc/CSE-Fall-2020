@@ -7,7 +7,7 @@
 
 // Global vars //
 char array[5];
-sem_t aphore1, aphore2;
+sem_t aphore;//, aphore2;
 sem_t mutex;
 
 // Function 1 //
@@ -17,15 +17,15 @@ void* funct1 (void* arg) {
         int i0;
 	int* thrID0 = (int*) arg;	 
         
+	sem_wait(&aphore);
 	for (i0 = 0; i0 < 5; i0++) {
-		sem_wait(&aphore1);
 		char to_buffer0 = (char) lower[rand() % 26]; 
         	sem_wait(&mutex);
 		array[i0] = to_buffer0;
 		printf("writer ID: %d, char written: %c\n", *thrID0, to_buffer0);
 		sem_post(&mutex);
-		sem_post(&aphore2);
 	}
+	sem_post(&aphore);
 	return 0;
 }
 
@@ -36,16 +36,15 @@ void* funct2 (void* arg) {
         int i1;
         int* thrID1 = (int*) arg;
 
+       	sem_wait(&aphore);
         for (i1 = 0; i1 < 5; i1++) {
-        	sem_wait(&aphore2);
 		char to_buffer1 = upper[rand() % 26];
         	sem_wait(&mutex);
 		array[i1] = to_buffer1;
         	printf("writer ID: %d, char written: %c\n", *thrID1, to_buffer1);
 		sem_post(&mutex);
-		sem_post(&aphore1);
 	}
-
+	sem_post(&aphore);
 	return 0;
 }
 
@@ -73,8 +72,8 @@ int main(int argc, char* argv[]) {
 	int i;
 	pthread_t tid[8];
 	sem_init(&mutex, 0, 1);
-	sem_init(&aphore1, 0, 5);
-	sem_init(&aphore2, 0, 0);
+	sem_init(&aphore, 0, 1);
+	//sem_init(&aphore2, 0, 0);
 
 	for (i = 0; i < 2; i ++) {
 		int toth = i;
