@@ -26,7 +26,7 @@ int xor_op(int x, int y) {
 
 
 /*
- * Extract `b`th byte of x
+ * Clear `b`th byte of x
  * Points: 10
  */
 int masking_and(int x, int b) {
