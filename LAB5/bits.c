@@ -30,7 +30,7 @@ int xor_op(int x, int y) {
  *   * Points: 10
  *    */
 int masking_and(int x, int b) {
-  int shift = 32 -(b*8);
+  int shift = (b*8);
   int result = (x & (~(0xff << shift)));
   return (result);
 }
@@ -40,7 +40,7 @@ int masking_and(int x, int b) {
  *   * Points: 10
  *    */
 int masking_or(int x, int b) {
-  int shift = 32 -(b*8);
+  int shift = (b*8);
   int result = (x | (0xff << shift));
   return (result);
 }
@@ -50,7 +50,7 @@ int masking_or(int x, int b) {
  *   * Points: 10
  *    */
 int masking_xor(int x, int b) {
-  int shift = 32 -(b*8);
+  int shift = (b*8);
   int result = (x ^ (0xff << shift));
   return (result);
 }
@@ -88,7 +88,6 @@ int bang(int x) {
 void bit_conversion(int x, char* bitstring) {
 int y = x;
 char buf[33];
-//char buf2[33];
 int index = 0;
 while (y > 0){
         if ((y & 1) == 0){
@@ -107,7 +106,6 @@ for (i = 0; i <= index; i++) {
    j--;
 }
 bitstring[index+1] = '\0';
-//bitstring = buf2;
 
 }
 
