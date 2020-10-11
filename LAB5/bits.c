@@ -88,14 +88,14 @@ int bang(int x) {
 void bit_conversion(int x, char* bitstring) {
 int y = x;
 char buf[33];
-char buf2[33];
+//char buf2[33];
 int index = 0;
 while (y > 0){
         if ((y & 1) == 0){
                 buf[index] = '0';
         }
         else if ((y & 1) == 1){
-                buf[index] = '1';
+               buf[index] = '1';
         }
         y = y >> 1;
         index++;
@@ -103,11 +103,11 @@ while (y > 0){
 int i;
 int j = index;
 for (i = 0; i <= index; i++) {
-   buf2[i] = buf[j - 1];
+   bitstring[i] = buf[j - 1];
    j--;
 }
-buf2[index+1] = '\0';
-bitstring = buf2;
+bitstring[index+1] = '\0';
+//bitstring = buf2;
 
 }
 
