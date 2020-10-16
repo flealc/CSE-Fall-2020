@@ -69,7 +69,6 @@ int main (int argc, char* argv[]) {
 	}
 
  	if (atoi(argv[1]) > 0) {
-		printf("positive\n");
 		binaryConv(atoi(argv[1]));
 	}	
  	
