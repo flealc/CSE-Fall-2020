@@ -25,7 +25,7 @@ return 0;
 
 int negbinaryConv (int val) {
 int i;
-int value = (val + (val * -2));
+int value = ((val + (val * -2)) -1) ;
 char buff[8];
 buff[0] = '1';
 for (i = 7; i >= 0; i--) {
@@ -38,7 +38,7 @@ for (i = 7; i >= 0; i--) {
 		value = value / 2;
 	}
 }
-buff[7] = '1';
+//buff[7] = '1';
 printf("%s\n", buff);
 return 0;
 }
