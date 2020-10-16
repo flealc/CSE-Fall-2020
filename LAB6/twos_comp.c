@@ -68,7 +68,7 @@ int main (int argc, char* argv[]) {
 	}
 	
 	// Check for valid range //
-	if ((atoi(argv[1])  < -127) || (atoi(argv[1]) > 128)) {
+	if ((atoi(argv[1])  < -128) || (atoi(argv[1]) > 127)) {
 		printf("Error: integer is out of range\n");
 		return 1;
 	}
