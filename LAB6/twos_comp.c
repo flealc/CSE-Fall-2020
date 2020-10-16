@@ -57,7 +57,7 @@ int main (int argc, char* argv[]) {
 	}
 	
 	if (strcmp(argv[1], "-0") == 0) {
-		printf("000000b0\n");
+		printf("10000001\n");
 		return 0;
 	}
 	
