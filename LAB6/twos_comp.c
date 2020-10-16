@@ -72,12 +72,20 @@ int main (int argc, char* argv[]) {
 		printf("Error: integer is out of range\n");
 		return 1;
 	}
+	const char ch = '.';
+
+	if (strchr(argv[1], ch) != NULL) {
+	printf("Error: Only integers accepted\n");
+	return 1;
+	}
 
  	if (atoi(argv[1]) > 0) {
-		binaryConv(atoi(argv[1]));
+	printf("%d\n", (atoi(argv[1])));	
+	binaryConv(atoi(argv[1]));
 	}	
  	
 	if (atoi(argv[1]) < 0) {
+	printf("%d\n", (atoi(argv[1])));	
 		negbinaryConv(atoi(argv[1]));
 	}	
 
