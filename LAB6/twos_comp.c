@@ -56,6 +56,11 @@ int main (int argc, char* argv[]) {
 		return 0;
 	}
 	
+	if (strcmp(argv[1], "-0") == 0) {
+		printf("000000b0\n");
+		return 0;
+	}
+	
 	// Check for valid input //
 	if (atoi(argv[1]) == 0) {
 		printf("Error: incorrect input\n");
