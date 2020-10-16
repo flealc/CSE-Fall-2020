@@ -80,12 +80,10 @@ int main (int argc, char* argv[]) {
 	}
 
  	if (atoi(argv[1]) > 0) {
-	printf("%d\n", (atoi(argv[1])));	
 	binaryConv(atoi(argv[1]));
 	}	
  	
 	if (atoi(argv[1]) < 0) {
-	printf("%d\n", (atoi(argv[1])));	
 		negbinaryConv(atoi(argv[1]));
 	}	
 
