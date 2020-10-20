@@ -65,7 +65,6 @@ int main (int argc, char* argv[]) {
 				if ((argv[1])[i] == '0') {
 					buff[i] = '1';
 				}
-			printf("%c\n", buff[i]);
 			}
 			for (i = 0; i < 8; i++) {
 					if (buff[i] == '1') {
