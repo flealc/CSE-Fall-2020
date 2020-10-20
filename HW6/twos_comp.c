@@ -65,14 +65,15 @@ int main (int argc, char* argv[]) {
 				if ((argv[1])[i] == '0') {
 					buff[i] = '1';
 				}
+			printf("%c\n", buff[i]);
 			}
-			buff[7] = '1';
 			for (i = 0; i < 8; i++) {
 					if (buff[i] == '1') {
 					result = (result + (powerof(2,(7-i))));
 					}
 
 			}
+			result = result + 1;
 			result = (result - (2 * result));		
 		}
 		
