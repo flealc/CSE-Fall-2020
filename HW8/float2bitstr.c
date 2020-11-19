@@ -110,7 +110,7 @@ int main (int argc, char * argv[]) {
 	
 	if (checkint >= 1) {
 		expo = (127 + (bintlen-1));
-		printf("expo %i\n", expo);
+//		printf("expo %i\n", expo);
 	}
 	else if (checkint < 1) {
 		for (i = 22; i >= 0; i --) {
