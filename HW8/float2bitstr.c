@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
+#include <math.h>
 
 int main (int argc, char * argv[]) {
 
@@ -29,8 +29,9 @@ int main (int argc, char * argv[]) {
 			}
 		}
 		int afterp = (strlen(argv[1]) - beforep) - 2;
-//m		printf("%d\n", beforep);
-//m		printf("%d\n", afterp);
+//		printf("%d\n", beforep);
+
+//		printf("%d\n", afterp);
 	}
 	else {
 		for (i = 0; i <= (strlen(argv[1])); i++) {
@@ -52,9 +53,8 @@ int main (int argc, char * argv[]) {
 	if (integerp + decimalp == 0) {
 		return 1;
 	} 
-
-//m	printf("%d\n", integerp);
-//m	printf("%f\n", decimalp);
+//	printf("%d\n", integerp);
+//	printf("%f\n", decimalp);
 	
 	if (sign == 1) {
 		integerp = integerp * -1;
@@ -62,16 +62,19 @@ int main (int argc, char * argv[]) {
 		checkint = checkint * -1;
 		decimalp = decimalp * -1;
 	}
+//	printf("%f\n", decimalp);
 	
 	//Create first part of Mantissa//
 		
 	//Convert integer part to binary//
 	char bintlen = 0;
 	
+	
 	for (i = 0; integerp >= 1; i++ ) {
 		integerp = integerp / 2;
 		bintlen = i + 1;
 	}
+	
 	char intmantissa[bintlen + 1];
 	intmantissa[bintlen] = '\0';
 	int d;
@@ -79,28 +82,28 @@ int main (int argc, char * argv[]) {
 		d = reference >> i;
 		if (d & 1) {
 			intmantissa[(bintlen-1) - i] ='1';
-			printf("1");
+//m			printf("1");
 		}
 
 		else {
 			intmantissa[(bintlen- 1) -i] = '0';
-			printf("0");
+//m			printf("0");
 		}
 	}
-//m	printf("\n");
-//m	printf("sign %i\n", bintlen);
-	decimalp =  (decimalp * 100);
-	int decimal = (int) decimalp;
+
+//	printf("bintlen %i\n", bintlen);
+	//decimalp =  (decimalp * 100);
+	//int decimal = (int) decimalp;
 	// Convert decimal part to binary //
-	char decmantissa[48];
-	for (i = 0; i < 48; i ++) {
-		decimal = decimal * 2;
-//m		printf("dec %d\n", decimal);
-		if (decimal > 100) {
+	char decmantissa[24];
+	for (i = 0; i <= 23; i ++) {
+		decimalp = decimalp * 2;
+	//	printf("dec %d %f\n", i+ 1, decimalp);
+		if (decimalp >= 1) {
 			decmantissa[i] = '1';
-			decimal = decimal -100;
+			decimalp = decimalp -1;
 		}
-		else {
+		else if (decimalp < 1) {
 			decmantissa[i] = '0';
 		}
 	}
@@ -111,6 +114,7 @@ int main (int argc, char * argv[]) {
 	int decexpoindex;
 	if (checkint >= 1) {
 		expo = (127 + (bintlen-1));
+//		printf("expo %i\n", expo);
 	}
 	else if (checkint < 1) {
 		for (i = 22; i >= 0; i --) {
@@ -123,8 +127,8 @@ int main (int argc, char * argv[]) {
 		expo = 127 - (decexpoindex + 1);
 	}
 
-//m	printf("intmantissa %.*s\n", bintlen, intmantissa);
-//m	printf("decmantissa %s\n", decmantissa);
+//	printf("intmantissa %.*s\n", bintlen, intmantissa);
+//	printf("decmantissa %s\n", decmantissa);
 
 
 	// Print string when checkint != 0//
@@ -142,35 +146,35 @@ int main (int argc, char * argv[]) {
 			}
 
 		}
-
+//		printf("\n");
 		for (i = 0; i < (bintlen - 1); i++) {
 			printf("%c", intmantissa[i + 1]);
 		} 
+//		printf("\n");
 		for (i = 0; i < (24 - bintlen); i++) {
 			printf("%c", decmantissa[i]);
 		} 
 		printf("\n");	
 	}
 	// Print string when checkint == 0 //
-	
-	else if (checkint == 0) {
+//	else if (checkint == 0) {
 		
-		printf("%i", sign);
-		for (i = 7 ; i >= 0; i-- ) {
-			d = expo >> i;
-			if (d & 1) {
-				printf("1");
-			}	
+//		printf("%i", sign);
+//		for (i = 7 ; i >= 0; i-- ) {
+//			d = expo >> i;
+//			if (d & 1) {
+//				printf("1");
+//			}	
 
-			else {
-				printf("0");
-			}
-		}
+//			else {
+//				printf("0");
+//			}
+//		}
 		
-		for (i = 0; i < 23; i++) {
-			printf("%c", decmantissa[i + (decexpoindex + 1)]);
-		} 
-		printf("\n");	
-	}	
+//		for (i = 0; i < 23; i++) {
+//			printf("%c", decmantissa[i + (decexpoindex + 1)]);
+//		} 
+//		printf("\n");	
+//	}	
 	return 0;
 } 
