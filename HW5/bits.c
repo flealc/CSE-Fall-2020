@@ -5,7 +5,7 @@
  *   Points: 5
  */
 int bitAnd(int x, int y) {
-  return 2;
+  return ~(~x | ~y);
 }
 
 /* 
@@ -16,7 +16,8 @@ int bitAnd(int x, int y) {
  *   Points: 10
  */
 int getByte(int x, int n) {
-  return 2;
+// (n << (2^3)
+  return ((( x & (0xff << (n << 3))) >> (n << 3)) & 0xff );
 }
 
 /* 
@@ -28,7 +29,13 @@ int getByte(int x, int n) {
  *  Points: 10
  */
 int byteSwap(int x, int n, int m) {
-    return 2;
+ int bn = ((( x & (0xff << (n << 3))) >> (n << 3)) & 0xff ); //extract n
+int bm = ((( x & (0xff << (m << 3))) >> (m << 3)) & 0xff ); //extract m
+int clear1 = (x & (~(0xff << (n << 3))));
+int clear2 = (clear1 & (~(0xff << (m << 3))));
+int mask1 = ( clear2 | (bn << (m << 3)));
+int mask2 = ( mask1 | (bm << (n << 3)));  
+ return mask2;
 }
 
 /* 
@@ -39,7 +46,8 @@ int byteSwap(int x, int n, int m) {
  *   Points: 15
  */
 int logicalShift(int x, int n) {
-  return 2;
+int signmask = (((0x1 << 31) >> n) << 1); 
+ return ((x >> n) & ~signmask);
 }
 
 /*
@@ -49,7 +57,11 @@ int logicalShift(int x, int n) {
  *   Points: 20
  */
 int bitCount(int x) {
-  return 2;
+int result = ((x & 1) + ((x >> 1) & 1) + ((x >> 2) & 1) + ((x >> 3) & 1) + ((x >> 4) & 1) + ((x >> 5) & 1) + ((x >> 6) & 1) + ((x >> 7) & 1) + ((x >> 8) & 1) + ((x >> 9) & 1) + ((x >> 10) & 1)); 
+int result1 =  (((x >> 11) & 1) + ((x >> 12) & 1) + ((x >> 13) & 1) + ((x >> 14) & 1) + ((x >> 15) & 1) + ((x >> 16) & 1) + ((x >> 17) & 1) + ((x >> 18) & 1) + ((x >> 19) & 1) + ((x >> 20) & 1));
+int result2 = (((x >> 21) & 1) + ((x >> 22) & 1) + ((x >> 23) & 1) + ((x >> 24) & 1) + ((x >> 25) & 1) + ((x >> 26) & 1) + ((x >> 27) & 1) + ((x >> 28) & 1) + ((x >> 29) & 1) + ((x >> 30) & 1) + ((x >> 31) & 1)); 
+return (result + result1 + result2);
+
 }
 
 /* 
@@ -59,7 +71,7 @@ int bitCount(int x) {
  *   Points: 20
  */
 int bang(int x) {
-  return 2;
+  return ((x >> 31) | ((~x + 1) >> 31)) + 1;;
 }
 
 /*
@@ -69,5 +81,11 @@ int bang(int x) {
  *   Points: 20
  */
 int bitParity(int x) {
-  return 2;
+int result = ((x & 1) + ((x >> 1) & 1) + ((x >> 2) & 1) + ((x >> 3) & 1) + ((x >> 4) & 1) + ((x >> 5) & 1) + ((x >> 6) & 1) + ((x >> 7) & 1) + ((x >> 8) & 1) + ((x >> 9) & 1) + ((x >> 10) & 1));
+int result1 =  (((x >> 11) & 1) + ((x >> 12) & 1) + ((x >> 13) & 1) + ((x >> 14) & 1) + ((x >> 15) & 1) + ((x >> 16) & 1) + ((x >> 17) & 1) + ((x >> 18) & 1) + ((x >> 19) & 1) + ((x >> 20) & 1));
+int result2 = (((x >> 21) & 1) + ((x >> 22) & 1) + ((x >> 23) & 1) + ((x >> 24) & 1) + ((x >> 25) & 1) + ((x >> 26) & 1) + ((x >> 27) & 1) + ((x >> 28) & 1) + ((x >> 29) & 1) + ((x >> 30) & 1) + ((x >> 31) & 1));
+
+int bits1= result + result1 + result2;
+
+  return bits1 & 1;
 }
